@@ -10,20 +10,20 @@ int	find_lvl(char **envp, char *find)
 	return (i);
 }
 
-void	ft_error(char *s)
+void	ft_error(void)
 {
-	perror(s);
+	perror("Error");
 	exit(0);
 }
 
 int	ft_access(char *path)
 {
 	if (access(path, F_OK) < 0)
-		ft_error("11");
+		ft_error();
 	else if (access(path, R_OK) < 0)
-		ft_error("12");
+		ft_error();
 	else if (access(path, W_OK) < 0)
-		ft_error("13");
+		ft_error();
 	else
 		return (1);
 	return (0);
@@ -35,7 +35,7 @@ void	free_all(char **arr)
 
 	i = -1;
 	if (!arr)
-		ft_error("14");
+		ft_error();
 	while (arr[++i])
 		free(arr[i]);
 	free(arr);

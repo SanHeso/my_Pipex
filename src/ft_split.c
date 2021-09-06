@@ -6,21 +6,11 @@
 /*   By: hnewman <hnewman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 12:52:23 by hnewman           #+#    #+#             */
-/*   Updated: 2021/09/01 18:36:24 by hnewman          ###   ########.fr       */
+/*   Updated: 2021/09/06 19:03:00 by hnewman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-static size_t	ft_strlen_c(char const *str, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
-}
 
 static char	**memfree(char **s, int p)
 {
@@ -39,9 +29,12 @@ static char	*ft_strdup_c(char const *src, char c)
 	char	*buf;
 
 	i = 0;
-	buf = malloc(sizeof(char) * (ft_strlen_c(src, c) + 1));
+	while (src[i] && src[i] != c)
+		i++;
+	buf = malloc(sizeof(char) * (i + 1));
 	if (!buf)
 		return (NULL);
+	i = 0;
 	while (src[i] && src[i] != c)
 	{
 		buf[i] = src[i];
@@ -72,6 +65,15 @@ static int	qua_word(char const *s, char c)
 	return (len);
 }
 
+int	init(int *i, int *j, char const *s)
+{
+	*i = 0;
+	*j = 0;
+	if (!s)
+		return (1);
+	return (0);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
@@ -79,9 +81,7 @@ char	**ft_split(char const *s, char c)
 	int		j;
 	int		num;
 
-	i = 0;
-	j = 0;
-	if (!s)
+	if (init(&i, &j, s))
 		return (NULL);
 	num = qua_word(s, c);
 	arr = malloc(sizeof(char *) * (num + 1));
@@ -98,5 +98,6 @@ char	**ft_split(char const *s, char c)
 			j++;
 		i++;
 	}
+	arr[i] = NULL;
 	return (arr);
 }

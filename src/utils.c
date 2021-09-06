@@ -2,7 +2,7 @@
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -56,4 +56,20 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_swap(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void	fd_close(int i, int *fd)
+{
+	if (i > 0)
+		close(fd[0]);
+	close(fd[1]);
 }
