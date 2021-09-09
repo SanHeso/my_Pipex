@@ -8,7 +8,7 @@ associated Makefile
 in a libft folder
 with its associated
 Makefile. Your
-project’s Makefile
+project's Makefile
 must compile the
 library by using
 its Makefile,

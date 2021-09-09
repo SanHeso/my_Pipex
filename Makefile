@@ -4,7 +4,13 @@ HEADER = includes/pipex.h
 
 SRCS = pipex.c utils.c utils_2.c ft_split.c find_path.c
 
+BNS_SRCS = bonus_find_path.c bonus_pipex.c bonus_utils.c bonus_utils_2.c ft_split.c
+
 SRCS_DIR = $(addprefix src/, $(SRCS))
+
+BNS_SRCS_DIR = $(addprefix src_bonus/, $(BNS_SRCS))
+
+BNS_OBJS = $(patsubst src_bonus/%.c, obj/%.o, $(BNS_SRCS_DIR))
 
 OBJS = $(patsubst src/%.c, obj/%.o, $(SRCS_DIR))
 
@@ -28,6 +34,13 @@ obj/%.o:	src/%.c
 $(NAME):	$(OBJS) $(HEADER)
 				$(CC) $(OBJS) -o $(NAME)
 				@echo $(MAGENTA) "$(NAME) is created!" $(EOC)
+
+obj/%.o:	src_bonus/%.c
+				$(CC) $(CFLAGS) -c $< -o $@
+
+bonus:		fclean $(OUT_DIR) $(BNS_OBJS) $(HEADER)
+				$(CC) $(BNS_OBJS) -o $(NAME)
+				@echo $(MAGENTA) "Bonus is added!" $(EOC)
 
 $(OUT_DIR):
 				@mkdir -p $@

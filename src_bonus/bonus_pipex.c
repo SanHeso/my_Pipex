@@ -97,15 +97,12 @@ int	main(int argc, char **argv, char **env)
 {
 	t_ppx	p;
 
-	if (argc < 5 || argc > 5)
+	if (argc < 5)
 	{
 		perror("Error");
 		return (1);
 	}
-	if (argc == 5)
-	{
-		p.pid = malloc(sizeof(pid_t) * argc - 3);
-		parser(&p, env, argv, argc - 4);
-	}
+	p.pid = malloc(sizeof(pid_t) * argc - 3);
+	parser(&p, env, argv, argc - 4);
 	return (0);
-}
+} 
